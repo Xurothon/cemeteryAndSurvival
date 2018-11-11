@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     Rigidbody playerRigidbody;
     int floorMask;
-    float camRayLength = 100f;
 
     private Vector3 currentLookTarget = Vector3.zero;
     public LayerMask layerMask;
@@ -39,28 +38,6 @@ public class PlayerController : MonoBehaviour
 
     void Turning()
     {
-        // Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        // Debug.DrawRay(camRay.origin, camRay.direction * 1000, Color.green);
-
-        // RaycastHit floorHit;
-
-        // if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
-        // {
-        //     Vector3 playerToMouse = floorHit.point - transform.position;
-        //     playerToMouse.y = 0f;
-        //     Quaternion newRotatation = Quaternion.LookRotation(playerToMouse);
-        //     playerRigidbody.MoveRotation(newRotatation);
-        // }
-
-        // Vector3 turnDir = new Vector3(Input.GetAxis("Mouse X"), 0f, Input.GetAxis("Mouse Y"));
-
-        // if (turnDir != Vector3.zero)
-        // {
-        //     Vector3 playerToMouse = (transform.position + turnDir) - transform.position;
-        //     playerToMouse.y = 0f;
-        //     Quaternion newRotatation = Quaternion.LookRotation(playerToMouse);
-        //     playerRigidbody.MoveRotation(newRotatation);
-        // }
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction * 1000, Color.green);

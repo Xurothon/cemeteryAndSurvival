@@ -15,11 +15,13 @@ public class PlayerHealth : MonoBehaviour {
 	PlayerController playerMovement;
 	bool isDead;
 	bool damaged;
+	PlayerShooting playerShooting;
 
 	void Awake () {
 		animator = GetComponent<Animator>();
 		playerMovement = GetComponent<PlayerController>();
 		currentHealth = startingHealth;
+		playerShooting = GetComponentInChildren<PlayerShooting>();
 	}
 	
 	void Update () {
@@ -45,5 +47,7 @@ public class PlayerHealth : MonoBehaviour {
 		isDead = true;
 		animator.SetTrigger("Die");
 		playerMovement.enabled = false;
+        playerShooting.enabled = false;
+		playerShooting.enabled = false;
 	}
 }
