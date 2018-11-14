@@ -8,7 +8,7 @@ public class EnemyMaterial : MonoBehaviour {
 	Material myMaterial; 
 	void Awake () {
 		myMaterial = GetComponent<Renderer>().material;
-		myMaterial.mainTexture = materials[Random.Range(0, materials.Length - 1)];
+		myMaterial.mainTexture = materials[Random.Range(0, materials.Length)];
 	}
 
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour {
 	
@@ -11,6 +12,17 @@ public class EnemyHealth : MonoBehaviour {
 	CapsuleCollider capsuleCollider;
 	bool isDead;
 	bool isSinking;
+	public GameObject enemyHP;
+	public Vector3 offset;
+	public EnemyHp enemySlider;
+
+	void Start(){
+		GameObject hp = Instantiate(enemyHP, Vector3.zero, Quaternion.identity) as GameObject;
+		hp.transform.SetParent(GameObject.Find("Canvas").transform);
+		hp.transform.SetAsFirstSibling();
+ 		hp.GetComponent<EnemyHp>().Enemy = gameObject;
+		enemySlider = hp.GetComponent<EnemyHp>();
+	}
 	void Awake () {
 		animator = GetComponent<Animator>();
 		capsuleCollider = GetComponent<CapsuleCollider>();
@@ -26,6 +38,7 @@ public class EnemyHealth : MonoBehaviour {
 	public void TakeDamage(int amount){
 		if(isDead) return;
 		currentHealth -= amount;
+		enemySlider.currentHp = currentHealth;
 		if(currentHealth <= 0){
 			Death();
 		}
@@ -34,6 +47,7 @@ public class EnemyHealth : MonoBehaviour {
 	void Death(){
 		isDead = true;
 		capsuleCollider.isTrigger = true;
+		Destroy(enemySlider.gameObject);
 		animator.SetTrigger("Dead");
 	}
 
