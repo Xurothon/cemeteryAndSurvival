@@ -12,7 +12,7 @@ public class PlayerShooting : MonoBehaviour
     void fireBullet()
     {
         Rigidbody bullet = createBullet();
-        bullet.GetComponent<Rigidbody>().velocity = transform.parent.forward * 15;
+        bullet.GetComponent<Rigidbody>().velocity = transform.parent.forward * 30;
     }
 
     private Rigidbody createBullet()

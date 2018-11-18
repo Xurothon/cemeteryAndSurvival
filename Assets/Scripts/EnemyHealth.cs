@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour {
 	
-	public int startingHealth = 100;
+	public int startingHealth = 90;
 	public int currentHealth;
 	public float sinkSpeed = 2.5f;
 	Animator animator;
@@ -15,6 +16,8 @@ public class EnemyHealth : MonoBehaviour {
 	public GameObject enemyHP;
 	public Vector3 offset;
 	public EnemyHp enemySlider;
+	public UnityEvent OnDestroy;
+	public int buff;
 
 	void Start(){
 		GameObject hp = Instantiate(enemyHP, Vector3.zero, Quaternion.identity) as GameObject;
@@ -22,11 +25,14 @@ public class EnemyHealth : MonoBehaviour {
 		hp.transform.SetAsFirstSibling();
  		hp.GetComponent<EnemyHp>().Enemy = gameObject;
 		enemySlider = hp.GetComponent<EnemyHp>();
+		startingHealth += (buff * 5);
+		enemySlider.ChangeValue(startingHealth);
+		currentHealth = startingHealth;
+
 	}
 	void Awake () {
 		animator = GetComponent<Animator>();
 		capsuleCollider = GetComponent<CapsuleCollider>();
-		currentHealth = startingHealth;
 	}
 	
 	void Update () {
@@ -48,6 +54,8 @@ public class EnemyHealth : MonoBehaviour {
 		isDead = true;
 		capsuleCollider.isTrigger = true;
 		Destroy(enemySlider.gameObject);
+		OnDestroy.Invoke();
+    	OnDestroy.RemoveAllListeners();
 		animator.SetTrigger("Dead");
 	}
 

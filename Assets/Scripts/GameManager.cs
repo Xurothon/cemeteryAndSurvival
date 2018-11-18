@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,18 +20,43 @@ public class GameManager : MonoBehaviour
     private int aliensOnScreen = 0;
     private float generatedSpawnTime = 0;
     private float currentSpawnTime = 0;
-
-    void Start(){
+    public int currentLevel;
+    int nextLevel;
+    public Text currentLevelText;
+    public Animator stageAnimator;
+    void Awake()
+    {
+        if (PlayerPrefs.HasKey("CurrentLevel"))
+        {
+            currentLevel = PlayerPrefs.GetInt("CurrentLevel");
+            nextLevel = currentLevel;
+            nextLevel++;
+            PlayerPrefs.SetInt("CurrentLevel", nextLevel);
+        }
+        currentLevelText.text = "" + currentLevel;
+    }
+    void Start()
+    {
         actualUpgradeTime = Random.Range(upgradeMaxTimeSpawn - 3.0f, upgradeMaxTimeSpawn);
         actualUpgradeTime = Mathf.Abs(actualUpgradeTime);
     }
 
-    public void AlienDestroyed(){
+    private void endGame()
+    {
+        stageAnimator.SetTrigger("PlayerFinish");
+    }
+    public void AlienDestroyed()
+    {
         aliensOnScreen -= 1;
         totalAliens -= 1;
+        if (totalAliens == 0){
+            Invoke("endGame", 2.0f);
+        } 
     }
-    void Update(){
-        if (player == null){
+    void Update()
+    {
+        if (player == null)
+        {
             return;
         }
         currentSpawnTime += Time.deltaTime;
@@ -63,6 +90,9 @@ public class GameManager : MonoBehaviour
                         GameObject spawnLocation = spawnPoints[spawnPoint];
                         GameObject newAlien = Instantiate(alien) as GameObject;
                         newAlien.transform.position = spawnLocation.transform.position;
+                        EnemyHealth alienScript = newAlien.GetComponent<EnemyHealth>();
+                        alienScript.buff = nextLevel;
+                        alienScript.OnDestroy.AddListener(AlienDestroyed);
                     }
                 }
             }

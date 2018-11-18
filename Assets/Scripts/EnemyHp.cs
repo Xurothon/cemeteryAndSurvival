@@ -13,4 +13,9 @@ public class EnemyHp : MonoBehaviour {
 		GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(Enemy.transform.position + offcet);
 		GetComponent<Slider>().value = currentHp;
 	}
+
+	public void ChangeValue(int value){
+		GetComponent<Slider>().maxValue = value;
+		currentHp = value;
+	}
 }

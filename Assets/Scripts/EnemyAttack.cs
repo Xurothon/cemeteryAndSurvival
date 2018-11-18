@@ -12,12 +12,15 @@ public class EnemyAttack : MonoBehaviour {
 	EnemyHealth enemyHealth;
 	bool playerInRange;
 	float timer;
+	int buff;
 
 	void Awake () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealth>();
 		animator = GetComponent<Animator>();
 		enemyHealth = GetComponent<EnemyHealth>();
+		buff = enemyHealth.buff;
+		attackDamage += buff;
 	}
 
 	void OnTriggerEnter(Collider other){
