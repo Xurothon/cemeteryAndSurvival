@@ -557,7 +557,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1906932355752714}
   m_LocalRotation: {x: -0.70567954, y: -0.044903383, z: 0.70567966, w: 0.044903275}
-  m_LocalPosition: {x: -0.0000000054396594, y: 0.6938669, z: -0.0699121}
+  m_LocalPosition: {x: -0.0000000054396594, y: 0.64, z: -0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4630728090473280}
@@ -614,7 +614,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1076128872753624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 82.28561, y: 0, z: 64.54819}
+  m_LocalPosition: {x: 46.216705, y: 0.01, z: 74.25517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4817820565046474}
@@ -844,7 +844,12 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   enemySlider: {fileID: 114909643416486232, guid: 70ff50bbfe667a24e90f28d827f50a6b,
     type: 2}
-  gameManager: {fileID: 0}
+  OnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  buff: 0
 --- !u!114 &114899766279392096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -890,10 +895,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.1
-  m_Height: 2
+  m_Radius: 1
+  m_Height: 0
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!137 &137568558475626700
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -968,7 +973,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.3
-  m_Speed: 3
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -976,7 +981,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.7
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
