@@ -1232,14 +1232,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4573930396473858, guid: 67ac115919064e048ab755214092db7a, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90.00001
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573930396473858, guid: 67ac115919064e048ab755214092db7a, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
     - target: {fileID: 1161721309879232, guid: 67ac115919064e048ab755214092db7a, type: 2}
       propertyPath: m_Name
       value: Rock_3 (2)
@@ -6598,7 +6590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a66906e7c1bcf459397c4b7f60afe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstLevel: MainLevel
+  firstLevel: LoadingScene
 --- !u!1001 &1104862144
 Prefab:
   m_ObjectHideFlags: 0

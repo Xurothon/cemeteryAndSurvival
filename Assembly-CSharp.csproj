@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\PlayerShooting.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Scripts\SceneLoading.cs" />
      <Compile Include="Assets\Scripts\Stage.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>E:/Cemetery and survival/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
