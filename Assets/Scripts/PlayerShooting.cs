@@ -7,12 +7,12 @@ public class PlayerShooting : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform launchPosition;
     private float currentTime;
-    public float timeBetweenBullets = 0.15f;
+    public float timeBetweenBullets = 0.2f;
 
     void fireBullet()
     {
         Rigidbody bullet = createBullet();
-        bullet.GetComponent<Rigidbody>().velocity = transform.parent.forward * 30;
+        bullet.GetComponent<Rigidbody>().velocity = transform.parent.forward * 35;
     }
 
     private Rigidbody createBullet()
