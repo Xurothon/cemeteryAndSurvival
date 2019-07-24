@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,36 +24,37 @@ public class GameManager : MonoBehaviour
     int nextLevel;
     public Text currentLevelText;
     public Animator stageAnimator;
-    void Awake()
+    void Awake ()
     {
-        if (PlayerPrefs.HasKey("CurrentLevel"))
+        if (PlayerPrefs.HasKey ("CurrentLevel"))
         {
-            currentLevel = PlayerPrefs.GetInt("CurrentLevel");
+            currentLevel = PlayerPrefs.GetInt ("CurrentLevel");
             nextLevel = currentLevel;
             nextLevel++;
-            PlayerPrefs.SetInt("CurrentLevel", nextLevel);
+            PlayerPrefs.SetInt ("CurrentLevel", nextLevel);
         }
         currentLevelText.text = "" + currentLevel;
     }
-    void Start()
+    void Start ()
     {
-        actualUpgradeTime = Random.Range(upgradeMaxTimeSpawn - 3.0f, upgradeMaxTimeSpawn);
-        actualUpgradeTime = Mathf.Abs(actualUpgradeTime);
+        actualUpgradeTime = Random.Range (upgradeMaxTimeSpawn - 3.0f, upgradeMaxTimeSpawn);
+        actualUpgradeTime = Mathf.Abs (actualUpgradeTime);
     }
 
-    private void endGame()
+    private void endGame ()
     {
-        stageAnimator.SetTrigger("PlayerFinish");
+        stageAnimator.SetTrigger ("PlayerFinish");
     }
-    public void AlienDestroyed()
+    public void AlienDestroyed ()
     {
         aliensOnScreen -= 1;
         totalAliens -= 1;
-        if (totalAliens == 0){
-            Invoke("endGame", 2.0f);
-        } 
+        if (totalAliens == 0)
+        {
+            Invoke ("endGame", 2.0f);
+        }
     }
-    void Update()
+    void Update ()
     {
         if (player == null)
         {
@@ -63,10 +64,10 @@ public class GameManager : MonoBehaviour
         if (currentSpawnTime > generatedSpawnTime)
         {
             currentSpawnTime = 0;
-            generatedSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);
-            if (aliensPerSpawn > 0 && aliensOnScreen < totalAliens)
+            generatedSpawnTime = Random.Range (minSpawnTime, maxSpawnTime);
+            if (aliensPerSpawn > -1 && aliensOnScreen < totalAliens)
             {
-                List<int> previousSpawnLocations = new List<int>();
+                List<int> previousSpawnLocations = new List<int> ();
                 if (aliensPerSpawn > spawnPoints.Length)
                 {
                     aliensPerSpawn = spawnPoints.Length - 1;
@@ -80,19 +81,19 @@ public class GameManager : MonoBehaviour
                         int spawnPoint = -1;
                         while (spawnPoint == -1)
                         {
-                            int randomNumber = Random.Range(0, spawnPoints.Length - 1);
-                            if (!previousSpawnLocations.Contains(randomNumber))
+                            int randomNumber = Random.Range (0, spawnPoints.Length - 1);
+                            if (!previousSpawnLocations.Contains (randomNumber))
                             {
-                                previousSpawnLocations.Add(randomNumber);
+                                previousSpawnLocations.Add (randomNumber);
                                 spawnPoint = randomNumber;
                             }
                         }
                         GameObject spawnLocation = spawnPoints[spawnPoint];
-                        GameObject newAlien = Instantiate(alien) as GameObject;
+                        GameObject newAlien = Instantiate (alien) as GameObject;
                         newAlien.transform.position = spawnLocation.transform.position;
-                        EnemyHealth alienScript = newAlien.GetComponent<EnemyHealth>();
+                        EnemyHealth alienScript = newAlien.GetComponent<EnemyHealth> ();
                         alienScript.buff = nextLevel;
-                        alienScript.OnDestroy.AddListener(AlienDestroyed);
+                        alienScript.OnDestroy.AddListener (AlienDestroyed);
                     }
                 }
             }
