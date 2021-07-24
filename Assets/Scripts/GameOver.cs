@@ -1,27 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOver : MonoBehaviour {
+[RequireComponent(typeof(Animator))]
+public class GameOver : MonoBehaviour
+{
+    public PlayerHealth playerHealth;
+    public float restastartDelay = 4f;
+    private Animator _animator;
+    private float _restastartTimer;
 
-	public string mainScene;
-	public PlayerHealth playerHealth;
-	public float restastartDelay = 4f;
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
-	Animator animator;
-	float restastartTimer;
-	void Awake () {
-		animator = GetComponent<Animator>();
-	}
-	
-	void Update () {
-		if(playerHealth.currentHealth <= 0){
-			animator.SetTrigger("GameOver");
-			restastartTimer += Time.deltaTime;
-			if(restastartTimer >= restastartDelay){
-				SceneManager.LoadScene(mainScene);
-			}
-		}
-	}
+    private void Update()
+    {
+        if (playerHealth.currentHealth <= 0)
+        {
+            _animator.SetTrigger("GameOver");
+            _restastartTimer += Time.deltaTime;
+            if (_restastartTimer >= restastartDelay)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+    }
 }

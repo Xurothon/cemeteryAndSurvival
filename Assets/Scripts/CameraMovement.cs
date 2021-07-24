@@ -1,26 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-
     public Transform target;
     public float moveSpeed;
-	Vector3 offset;
-    // Use this for initialization
-    void Start()
+    private Vector3 offset;
+
+    private void Start()
     {
-		offset = transform.position - target.position;
+        offset = transform.position - target.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (target != null)
         {
             Vector3 targetCamPos = target.position + offset;
-            transform.position = Vector3.Lerp (transform.position, targetCamPos, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetCamPos, moveSpeed * Time.deltaTime);
         }
     }
 }

@@ -1,21 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour {
-
+public class MainMenu : MonoBehaviour
+{
     public string firstLevel;
     public int startingLives;
-    int currentLevel = 1;
+    private int _currentLevel = 1;
 
-    public void NewGame() {
+    public void NewGame()
+    {
         SceneManager.LoadScene(firstLevel);
         PlayerPrefs.SetInt("PlayerLives", startingLives);
-        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+        PlayerPrefs.SetInt("CurrentLevel", _currentLevel);
     }
 
-    public void QuitGame() {
+    public void QuitGame()
+    {
         Application.Quit();
     }
 }

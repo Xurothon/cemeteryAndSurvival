@@ -1,27 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
     public int damagePerShot = 20;
-    void OnBecameInvisible()
+
+    private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
-    }
-
-    void OnTriggerEnter(Collider other){
-        if(other.tag == "Enemy"){
-            EnemyHealth enemyHealth = other.GetComponent<Collider>().GetComponent<EnemyHealth>();
-            if(enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(damagePerShot);
-            }
+        if (other.TryGetComponent(out EnemyHealth enemyHealth))
+        {
+            enemyHealth.TakeDamage(damagePerShot);
         }
+    }
+
+    private void Awake()
+    {
+        Destroy(gameObject, 10f);
     }
 }
